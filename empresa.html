@@ -1,0 +1,79 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Hexa a portfolio bootstrap Website Template | Home :: w3layouts</title>
+<!-- Bootstrap -->
+<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+ <!--[if lt IE 9]>
+     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<link href='http://fonts.googleapis.com/css?family=Kreon:300,400,700' rel='stylesheet' type='text/css'>
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<!-- start plugins -->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.js"></script>
+	<style type="text/css">
+		body{
+			background-color:#333;
+		}
+	</style>
+	<script>
+		$(function() {
+			var texto = document.getElementById("texto");
+			var url   = window.location.search.replace("?", "");
+				if(url.lenght){
+					texto.innerHTML("<p>cadastro realizado</p>")
+				}
+			}
+		});
+	</script>
+<!----font-Awesome----->
+   	<link rel="stylesheet" href="fonts/css/font-awesome.min.css">
+<!----font-Awesome----->
+</head>
+<body>
+<div class="header_bg" id="home"><!-- start header -->
+<div class="container">
+	<div class="row header text-center specials">
+		<div class="h_logo">
+			<a href="index.html"><img src="images/logo.png" alt="" class="responsive"/></a>
+		</div>
+		<nav class="top-nav">
+			<ul class="top-nav nav_list">
+				<li><a href="empresa.html">Cadastro de Empresa</a></li>
+				<li class="page-scroll"><a href="contato.html">Cadastro de Contato</a></li>
+				<li class="logo page-scroll"><a title="hexa" href="index.html"><img src="images/logo.png" alt="" class="responsive"/></a></li>
+				<li class="page-scroll"><a href="listacontato.html">Lista Contato</a></li>
+			    
+		
+			</ul>
+			<a href="#" id="pull"><img src="images/nav-icon.png" title="menu" /></a>
+		</nav>
+		<div class="clearfix"></div>
+	</div>
+</div>
+</div>
+<div class="footer_bg"><!-- start footer -->
+<div class="container">
+	<div class="row footer">
+		<div class="col-md-8 contact_left">
+			<h3>Cadastro de Empresa:</h3>
+			<form method="post" action="controller/Inserirempresa.php" id="cadastro">
+				<input type="text" name="nome" value="" placeholder="Nome da Empresa">
+				<input type="text" name="telefone" value="" placeholder="Telefone principal">
+				<span class="pull-right"><input id="add" type="submit" value="submit"></span>
+			</form>
+			
+		</div>
+		
+	</div>
+	
+</div>
+</div>
+</body>
+</html>

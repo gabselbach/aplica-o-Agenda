@@ -1,0 +1,148 @@
+
+<!--A Design by W3layouts
+Author: W3layout
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Hexa a portfolio bootstrap Website Template | Home :: w3layouts</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<meta charset="UTF-8">
+<meta charset="ISO-8859-1"> 
+<!-- Bootstrap -->
+<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+ <!--[if lt IE 9]>
+     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<link href='http://fonts.googleapis.com/css?family=Kreon:300,400,700' rel='stylesheet' type='text/css'>
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<!-- start plugins -->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script>
+		$(function() {
+				var p= window.location;
+				var url=p.toString().split("&");
+				var t=url[1];
+			if(t){
+				alert("Cadastro alterado");
+			}
+			//pegando o url e assim salvando o codigo que foi passado
+			var url_atual = window.location;
+			var url=url_atual.toString().split("?");
+			var cod=url[1];
+			//pegando a data e hora atual
+			var data= new Date();
+			var dia=data.getDate();
+			var ano=data.getFullYear();
+			var mes=data.getMonth();
+			var hora= data.getHours();
+			var minuto=data.getMinutes();
+			var segundo=data.getSeconds();
+			hora=hora +":"+minuto+":"+segundo;
+			mes=mes+1;
+			data=ano +"-"+mes+"-"+dia;
+			var inputdata=document.getElementById("data");
+			document.getElementById("data").value=data;
+			var inputhora=document.getElementById("hora");
+			document.getElementById("hora").value=hora;
+			//ajax que pega os dados do banco
+			
+						 $.ajax({
+                    	type:"POST",
+                    	async: false,
+                    url: "controller/Selecionadadoscontato.php",
+                     dataType: "json",
+                     data: {'cod':cod},
+                    success: function(result) {
+
+                    	//armazenando o resultado que veio do ajax
+                    	var elemento=result;
+                    	//separa o primeiro array com os dados principais
+                    	var dados = elemento[1];
+                    	//separa os dados entre si e armazena nas respectivas variaveis
+                    	dados=dados.toString().split(";");
+                    	var cep=dados[0];
+                    	var cidade=dados[1];
+                    	var bairro=dados[2];
+                    	var endereco=dados[3];
+
+                    	//colocando os inputs com os valores 
+                    	$("#form").append("<p>Endereço:</p><input type='text' name='ende' value='"+endereco+"'>\
+                    		<p>cep:</p><input type='text' name='cep' value='"+cep+"'>\
+                    		<p>bairro:</p><input type='text' name='bairro' value='"+bairro+"' >\
+                    		<p>cidade:</p><input type='text' name='cidade' value='"+cidade+"'>\
+                    		</br>");
+
+                    	//separando os resultados
+                    	var telefones= elemento[2];
+                    	var a,b,c;
+                    	var novo;
+                    	var contad=1;
+                    	
+                    	for (novo in telefones) {
+                    		a=telefones[novo].toString().split(",");
+                    		b=a[0];
+                    		c=a[1];
+							
+                    	}
+
+    
+                    		$("#form").append("<span class='pull-right'><input  type='submit' value='Alterar'></span>");
+                    }
+                });
+						 $("#form").append("<input type='hidden' name='cod' value='"+cod+"''>");
+
+						 /*função que adiciona novos inputs de telefone*/
+		});
+	</script>
+
+</head>
+<body >
+<div class="header_bg" id="home"><!-- start header -->
+<div class="container">
+	<div class="row header text-center specials">
+		<div class="h_logo">
+			<a href="index.html"><img src="images/logo.png" alt="" class="responsive"/></a>
+		</div>
+		<nav class="top-nav">
+			<ul class="top-nav nav_list">
+				<li><a href="empresa.html">Cadastro de Empresa</a></li>
+				<li class="page-scroll"><a href="contato.html">Cadastro de Contato</a></li>
+				<li class="logo page-scroll"><a title="hexa" href="index.html"><img src="images/logo.png" alt="" class="responsive"/></a></li>
+				<li class="page-scroll"><a href="listacontato.html">Lista Contato</a></li>
+			    
+			   
+			</ul>
+			<a href="#" id="pull"><img src="images/nav-icon.png" title="menu" /></a>
+		</nav>
+		<div class="clearfix"></div>
+	</div>
+</div>
+</div>
+<div class="footer_bg" id="contact"><!-- start footer -->
+<div class="container">
+	<div class="row footer">
+		<div class="col-md-8 contact_left">
+			<h3>Cadastro de Cliente:</h3>
+			<form method="post" action="controller/Alterarcontato.php" id="form">
+			
+			<input type="hidden" id="hora" name="hora" value="">
+				<input type="hidden" id="data" name="data" value="">
+
+				
+			</form>
+		</div> 
+				
+	</div>
+</div>
+</div>
+</body>
+</html>

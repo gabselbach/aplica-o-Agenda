@@ -1,0 +1,162 @@
+
+<!--A Design by W3layouts
+Author: W3layout
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Hexa a portfolio bootstrap Website Template | Home :: w3layouts</title>
+<!-- Bootstrap -->
+<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+ <!--[if lt IE 9]>
+     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<link href='http://fonts.googleapis.com/css?family=Kreon:300,400,700' rel='stylesheet' type='text/css'>
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<!-- start plugins -->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script>
+		$(function() {
+			
+			//pegando a data e hora atual
+			var data= new Date();
+			var dia=data.getDate();
+			var ano=data.getFullYear();
+			var mes=data.getMonth();
+			var hora= data.getHours();
+			var minuto=data.getMinutes();
+			var segundo=data.getSeconds();
+			hora=hora +":"+minuto+":"+segundo;
+			mes=mes+1;
+			data=ano +":"+mes+":"+dia;
+			var inputdata=document.getElementById("data");
+			document.getElementById("data").value=data;
+			var inputhora=document.getElementById("hora");
+			document.getElementById("hora").value=hora;
+			//ajax que pega os dados do banco
+			
+						 $.ajax({
+                    	type:"POST",
+                    	async: false,
+                    url: "controller/ListaEmpresa.php",
+                     dataType: "json",
+                    success: function(result) {
+                    	//pegando o elemento select
+                    	var x = document.getElementById("empresas");
+                    	//armazenando o resultado que veio do ajax
+                    	var elemento=result;
+                    	var novo= new Array();
+                    	//separando os resultados
+                    	 novo=elemento.toString().split(",");
+                    	var contador=1;
+                    	var i;
+                    	//for para percorrer todos os valores e construir os option
+                    	for(i=0;i<novo.length;i+=2){
+                    		var option = document.createElement("option");
+                    	//convertendo string em int
+	                    	var num = parseInt(novo[i]);
+	                    	//as posições imapares são os numeros e as pares os nomes
+	                    	var nome= novo[i+1];
+	    					option.text =nome;
+	    					option.value=num;
+	    					x.options.add(option, 1);
+                    	}
+                    }
+                });
+						 /*função que adiciona novos inputs de telefone*/
+				$("#botao").click(function(e){
+						  e.preventDefault();
+						  var cont= parseInt(document.getElementById("cont").value);
+						  cont++;
+						  var name= "telefone"+cont;
+						 $("#inputstelefone").append("<h4><input placeholder='Telefone' style='width:40%;' type='text' name='telefone"+cont+"' value='' /></h4>");
+						 $("#inputstelefone").append("<h5><select id='tipo' name='tipotelefone"+cont+"'>\
+									<option value='Residencial'>Residencial</option>\
+									<option value='Celular'>Celular</option>\
+									<option value='Trabalho'>Trabalho</option>\
+									</select></h5>");
+								document.getElementById("cont").value=cont;
+
+			});
+					 /*função que adiciona novos inputs de email*/
+			$("#bt").click(function(e){
+						  e.preventDefault();
+						  var cont= parseInt(document.getElementById("conte").value);
+						  cont++;
+						  var name= "email"+cont;
+						 $("#inputsemail").append("<input style='width:40%'; type='email' \
+						 	placeholder='Email'  name=email"+cont+"' value='' />");
+						 document.getElementById("conte").value=cont;
+
+			});
+		});
+	</script>
+
+</head>
+<body >
+<div class="header_bg" id="home"><!-- start header -->
+<div class="container">
+	<div class="row header text-center specials">
+		<div class="h_logo">
+			<a href="index.html"><img src="images/logo.png" alt="" class="responsive"/></a>
+		</div>
+		<nav class="top-nav">
+			<ul class="top-nav nav_list">
+				<li><a href="empresa.html">Cadastro de Empresa</a></li>
+				<li class="logo page-scroll"><a title="hexa" href="index.html"><img src="images/logo.png" alt="" class="responsive"/></a></li>
+			    <li class="page-scroll"><a href="cliente.html">Cadastro de Cliente</a></li>
+			</ul>
+			<a href="#" id="pull"><img src="images/nav-icon.png" title="menu" /></a>
+		</nav>
+		<div class="clearfix"></div>
+	</div>
+</div>
+</div>
+<div class="footer_bg" id="contact"><!-- start footer -->
+<div class="container">
+	<div class="row footer">
+		<div class="col-md-8 contact_left">
+			<h3>Cadastro de Cliente:</h3>
+			<form method="post" action="controller/Inserircontato.php">
+				<input type="text" name="nome" value="" placeholder="Nome ">
+				<input type="text" name="sobrenome" value="" placeholder="Sobrenome ">
+				<input type="text" name="ende" value="" placeholder="Endereço">
+				<input type="text" name="cep" value="" placeholder="CEP(apenas numeros)">
+				<input type="text" name="bairro" value="" placeholder="Bairro">
+				<input type="text" name="cidade" value="" placeholder="Cidade">
+				<input type="hidden" id="hora" name="hora" value="">
+				<input type="hidden" id="data" name="data" value="">
+				<h4><p style="color:#9C9C9C;">Empresa/Organização na qual faz parte:</p></h4><h5 style="width: 150px;height:50px;float:right;margin-top:-30px;"><select id="empresas" name="empresas">
+				
+				</select ></h5>
+				<div id="inputstelefone">
+				<input style="width:40%"; type="text" placeholder="telefone"  name="telefone1" value="">
+									<h5><select id="tipo" name="tipotelefone1">
+									<option value="Residencial">Residencial</option>
+									<option value="Celular">Celular</option>
+									<option value="Trabalho">Trabalho</option>
+									</select></h5>
+				</div> <button id="botao" type="button" class="btn btn-primary"> Mais Telefones </button>
+				<input type="hidden" id="cont" name="qttelefones" value="1">
+				  </br>
+				<div id="inputsemail">
+				<input style="width:40%"; type="email" placeholder="Email"  name="email1" value="">
+				</div>
+				    <button id="bt" type="button" class="btn btn-primary"> Adicionar emails </button>
+				     <input type="hidden" id="conte" name="qtemail" value="1"></br>
+				<span class="pull-right"><input  type="submit" value="submit"></span>
+			</form>
+		</div> 
+				
+	</div>
+</div>
+</div>
+</body>
+</html>

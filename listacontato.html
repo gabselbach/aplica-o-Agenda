@@ -1,0 +1,96 @@
+
+<!--A Design by W3layouts
+Author: W3layout
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Hexa a portfolio bootstrap Website Template | Home :: w3layouts</title>
+<!-- Bootstrap -->
+<link href="css/bootstrap.min.css" rel='stylesheet' type='text/css' />
+<link href="css/bootstrap.css" rel='stylesheet' type='text/css' />
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+ <!--[if lt IE 9]>
+     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+<link href='http://fonts.googleapis.com/css?family=Kreon:300,400,700' rel='stylesheet' type='text/css'>
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<!-- start plugins -->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+	<script>
+		$(function() {
+
+			//ajax que pega os dados do banco
+			
+						 $.ajax({
+                    	type:"POST",
+                    	async: false,
+                    url: "controller/Listacontato.php",
+                     dataType: "json",
+                    success: function(result) {
+                 		var elemento=new Array();
+                 		var a=new Array();
+                 		var b;
+                 		var c;
+                 		//for para percorrer os dados que estao chegando do ajax
+                    	for (key in result) {
+                    		a=result[key].toString().split(",");
+                    		b=a[0];
+                    		c=a[1];
+                    			elemento[b]=c;
+                    	}
+
+                    	//for para percorrer todos os valores e colocar os dados na tela para o usuario
+                    	for(i=1;i<elemento.length;i++){
+                    		var nome= elemento[i];
+                    		var cod= i;
+                    		$("#form").append("<p>"+nome+"</p><a href='alterarcontato.html?"+cod+"'><button class='btn btn-primary'>Altera dados</button></a>");
+                    	}
+                   }
+			});
+		});
+	</script>
+
+</head>
+<body >
+<div class="header_bg" id="home"><!-- start header -->
+<div class="container">
+	<div class="row header text-center specials">
+		<div class="h_logo">
+			<a href="index.html"><img src="images/logo.png" alt="" class="responsive"/></a>
+		</div>
+		<nav class="top-nav">
+			<ul class="top-nav nav_list">
+				<li><a href="empresa.html">Cadastro de Empresa</a></li>
+				<li class="page-scroll"><a href="contato.html">Cadastro de Contato</a></li>
+				<li class="logo page-scroll"><a title="hexa" href="index.html"><img src="images/logo.png" alt="" class="responsive"/></a></li>
+				<li class="page-scroll"><a href="listacontato.html">Lista Contato</a></li>
+			   
+			   
+			</ul>
+			<a href="#" id="pull"><img src="images/nav-icon.png" title="menu" /></a>
+		</nav>
+		<div class="clearfix"></div>
+	</div>
+</div>
+</div>
+<div class="footer_bg" id="contact"><!-- start footer -->
+<div class="container">
+	<div class="row footer">
+		<div class="col-md-8 contact_left">
+			<h3>Cadastro de Cliente:</h3>
+			<div id="form">
+			
+			</div>
+		</div> 
+				
+	</div>
+</div>
+</div>
+</body>
+</html>
